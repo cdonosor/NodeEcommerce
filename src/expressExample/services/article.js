@@ -34,7 +34,13 @@ class ArticleService {
    * @param {import("mongoose").Schema.Types.ObjectId} args.userId
    */
   constructor(args = {}) {
-    const { articleId = '', name = '', description = '', price = 1, userId = '' } = args
+    const {
+      articleId = '',
+      name = '',
+      description = '',
+      price = 1,
+      userId = ''
+    } = args
 
     this.#articleId = articleId
     this.#name = name
@@ -119,22 +125,31 @@ class ArticleService {
     const article = await getArticleByID(this.#articleId)
     if (!article)
       throw new httpErrors.NotFound('The requested article does not exist')
-   // const seller = await sellerBalance.verifyUserExists()
+    // const seller = await sellerBalance.verifyUserExists()
 
-    const buyerUser = await new UserService({userId:this.#userId}).getUserByID()
+    const buyerUser = await new UserService({
+      userId: this.#userId
+    }).getUserByID()
 
-    const actualBalance = await new BalanceService({userId: buyerUser._id}).getBalanceByUserID()
-    const totalBalance = actualBalance.reduce((total, obj) => obj.balance + total,0)
+    const actualBalance = await new BalanceService({
+      userId: buyerUser._id
+    }).getBalanceByUserID()
+    const totalBalance = actualBalance.reduce(
+      (total, obj) => obj.balance + total,
+      0
+    )
     console.log(totalBalance)
 
-    if(totalBalance < article.price)
-      throw new httpErrors.BadRequest('Not enough balance to purchase this item, please recharge')
+    if (totalBalance < article.price)
+      throw new httpErrors.BadRequest(
+        'Not enough balance to purchase this item, please recharge'
+      )
 
     //  const buyer = await buyerService.verifyUserExists()
 
     const updateBuyerBalance = new BalanceService({
       userId: buyerUser.id,
-      balance: article.price *-1
+      balance: article.price * -1
     }).saveBalance()
 
     const updateSellerBalance = new BalanceService({
@@ -147,8 +162,11 @@ class ArticleService {
     return await this.getArticlesByUser()
   }
 
-  async updateArticleUser(){
-    const buyerUser = await new UserService({userId:this.#userId}).getUserByID()
+  async updateArticleUser() {
+    const buyerUser = await new UserService({
+      userId: this.#userId
+    }).getUserByID()
+
     return await updateArticleUser({
       id: this.#articleId,
       userId: buyerUser._id

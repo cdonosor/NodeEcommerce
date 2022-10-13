@@ -35,7 +35,7 @@ ArticleRouter.route('/article/:userId').post(
   async (req, res, next) => {
     try {
       const {
-        params: { userId: userId },
+        params: { userId },
         body: { name, description, price, roleId }
       } = req
 
@@ -55,7 +55,6 @@ ArticleRouter.route('/article/:userId').post(
     }
   }
 )
-
 
 ArticleRouter.route('/articles/:userId').get(
   validatorCompiler(userIDSchema, 'params'),
@@ -95,12 +94,12 @@ ArticleRouter.route('/user/:userId/articles/buy/:articleId')
       next(error)
     }
   })
-  .post(auth.verifyUser(),
-   async (req, res, next) => {
+  .post(auth.verifyUser(), async (req, res, next) => {
     try {
       const {
-        params: { articleId: articleId, userId : userId }
+        params: { articleId, userId }
       } = req
+
       return response({
         error: false,
         message: await new ArticleService({ userId, articleId }).buyArticle(),

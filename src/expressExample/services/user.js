@@ -66,13 +66,13 @@ class UserService {
   }
 
   async verifyUserRole() {
-    //if (!this.#userId)
-      //throw new httpErrors.BadRequest('Missing required field: userId')
+    // if (!this.#userId)
+    // throw new httpErrors.BadRequest('Missing required field: userId')
 
     const role = await getUserByID(this.#userId)
-    //if (!user) throw new httpErrors.NotFound('User not found')
+    // if (!user) throw new httpErrors.NotFound('User not found')
 
-   // return user
+    // return user
   }
 
   async saveUser() {
@@ -108,7 +108,7 @@ class UserService {
   }
 
   async getUserByID() {
-    //console.log(this.#userId)
+    // console.log(this.#userId)
     if (!this.#userId)
       throw new httpErrors.BadRequest('Missing required field: userId acaa2')
 

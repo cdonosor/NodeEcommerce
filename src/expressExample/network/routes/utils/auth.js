@@ -91,15 +91,14 @@ const verifyUser = () => {
 }
 
 const verifyIsCurrentUser = () => {
-  
   return async (req, res, next) => {
-    //console.log(req)
+    // console.log(req)
     try {
       const {
-        params: { userId: userId },
+        params: { userId },
         headers: { authorization }
       } = req
-      //console.log(params)
+      // console.log(params)
       const token = getToken(authorization)
       const payload = jwt.verify(token, process.env.SECRET)
       const { email, password } = validateUserPayload(payload)
@@ -116,19 +115,18 @@ const verifyIsCurrentUser = () => {
 }
 
 const verifyUserRole = () => {
-  
   return async (req, res, next) => {
     try {
       const {
-        params: { userId: userId },
-        body: { roleId: roleId }
+        params: { userId },
+        body: { roleId }
       } = req
-      const user = await new UserService({ userId: userId }).getUserByID()
-      const role = await new RoleService({id: roleId}).getRoleByID()
-console.log(String(user.role.id), String(role.id))
-      if(String(user.role.id) === String(role.id))  return next()
-        return next(new httpErrors.BadRequest('User doesnt have the right role'))
+      const user = await new UserService({ userId }).getUserByID()
+      const role = await new RoleService({ id: roleId }).getRoleByID()
+      console.log(String(user.role.id), String(role.id))
+      if (String(user.role.id) === String(role.id)) return next()
 
+      return next(new httpErrors.BadRequest('User doesnt have the right role'))
     } catch (error) {
       return handleError(error, next)
     }

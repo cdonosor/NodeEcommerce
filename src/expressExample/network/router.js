@@ -9,7 +9,13 @@ const {
   articleRouter,
   response
 } = require('./routes')
-const routers = [userRouter, urlRouter, roleRouter, balanceRouter, articleRouter]
+const routers = [
+  userRouter,
+  urlRouter,
+  roleRouter,
+  balanceRouter,
+  articleRouter
+]
 
 /**
  * @param {import('express').Express} app

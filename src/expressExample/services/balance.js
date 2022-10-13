@@ -11,11 +11,7 @@ const {
   hash: { hashString }
 } = require('../utils')
 const {
-  balance: {
-    getBalanceByUserID,
-    saveBalance,
-    getAllBalances
-  }
+  balance: { getBalanceByUserID, saveBalance, getAllBalances }
 } = queries
 
 class BalanceService {
@@ -23,10 +19,7 @@ class BalanceService {
   #balance
 
   constructor(args = {}) {
-    const {
-      userId = '',
-      balance = ''
-    } = args
+    const { userId = '', balance = '' } = args
 
     this.#userId = userId
     this.#balance = balance
@@ -42,7 +35,7 @@ class BalanceService {
     const user = await new UserService({ userId: this.#userId })
     const userExist = await user.verifyUserExists()
 
-    /*const role = await new RoleService({id: '3'})
+    /* const role = await new RoleService({id: '3'})
 
     const clientRole = await role.getRoleByID()
 
@@ -51,7 +44,7 @@ class BalanceService {
     if(String(userExist.role) !== String(clientRole._id)) 
       throw new httpErrors.BadRequest('User is not a client')
     */
-    //const userRole = await user.verifyUserRole()
+    // const userRole = await user.verifyUserRole()
 
     await saveBalance({
       id: nanoid(),
@@ -77,10 +70,6 @@ class BalanceService {
   async getAllBalances() {
     return await getAllBalances()
   }
-
-
- 
-
 }
 
 module.exports = BalanceService

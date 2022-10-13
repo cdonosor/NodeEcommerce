@@ -10,7 +10,6 @@ const BalanceIDSchema = Type.Object({
   id: Type.String({ minLength: 21, maxLength: 21 })
 })
 
-
 module.exports = {
   storeBalanceSchema,
   updateBalanceSchema,

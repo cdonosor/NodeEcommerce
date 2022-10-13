@@ -28,7 +28,9 @@ describe('API: GET /', () => {
 describe('E2E test: Use cases from UserService', () => {
   const buyerName = faker.name.firstName()
   const buyerLastName = faker.name.lastName()
-  const buyerEmail = faker.internet.email(buyerName, buyerLastName).toLowerCase()
+  const buyerEmail = faker.internet
+    .email(buyerName, buyerLastName)
+    .toLowerCase()
   const buyerPassword = faker.datatype.string()
   const buyerRole = '3'
   const newUserBuyer = {
@@ -41,7 +43,9 @@ describe('E2E test: Use cases from UserService', () => {
 
   const sellerName = faker.name.firstName()
   const sellerLastName = faker.name.lastName()
-  const sellerEmail = faker.internet.email(sellerName, sellerLastName).toLowerCase()
+  const sellerEmail = faker.internet
+    .email(sellerName, sellerLastName)
+    .toLowerCase()
   const sellerPassword = faker.datatype.string()
   const sellerRole = '4'
   const newUserSeller = {
@@ -57,13 +61,11 @@ describe('E2E test: Use cases from UserService', () => {
     refreshToken: ''
   }
 
-
   const tokensSeller = {
     accessToken: '',
     refreshToken: ''
   }
 
-  
   let idBuyer = ''
   let _idBuyer = ''
   const newBalance = 10000
@@ -72,7 +74,6 @@ describe('E2E test: Use cases from UserService', () => {
   let _idSeller = ''
 
   let idProduct = ''
-  
 
   describe('Testing save user with buyer role', () => {
     let response = {}
@@ -113,7 +114,6 @@ describe('E2E test: Use cases from UserService', () => {
       })
 
       expect(allUsers.some(u => u.email === newUserBuyer.email)).toBe(true)
-
     })
   })
 
@@ -146,79 +146,82 @@ describe('E2E test: Use cases from UserService', () => {
   })
 
   describe('Testing post a new article as seller', () => {
-    response: {}
+    {
+    }
     const article = {
       name: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
       price: 10000,
       roleId: '4'
     }
-    
+
     test('Should return 201 status code', async () => {
-     response = await axios.post(`${URL}/api/article/${idSeller}`, article, {
+      response = await axios.post(`${URL}/api/article/${idSeller}`, article, {
         headers: {
-         Authorization: `Bearer ${tokensSeller.accessToken}`
+          Authorization: `Bearer ${tokensSeller.accessToken}`
         }
-       }
-      )
+      })
 
       expect(response.status).toBe(201)
       idProduct = response.data.message.id
     })
   })
 
-
   describe('Testing buy a product without credit', () => {
-    response: {}
-    test('Should throw error with message not enough money', async () => {
-    
-    try {
-      await axios.post(`${URL}/api/user/${idBuyer}/articles/buy/${idProduct}`, {
-          headers: {
-            Authorization: `Bearer ${tokensBuyer.accessToken}`
-          }
-      })
-    } catch (error) {
-        expect(error.response.status).toBe(400)
+    {
     }
+    test('Should throw error with message not enough money', async () => {
+      try {
+        await axios.post(
+          `${URL}/api/user/${idBuyer}/articles/buy/${idProduct}`,
+          {
+            headers: {
+              Authorization: `Bearer ${tokensBuyer.accessToken}`
+            }
+          }
+        )
+      } catch (error) {
+        expect(error.response.status).toBe(400)
+      }
     })
   })
 
   describe('Testing charge balance to buyer', () => {
-    response: {}
+    {
+    }
     const balance = {
       balance: 10000,
       roleId: '3'
     }
-    
+
     test('Should return 201 status code', async () => {
-     response = await axios.post(`${URL}/api/balance/${idBuyer}`, balance, {
+      response = await axios.post(`${URL}/api/balance/${idBuyer}`, balance, {
         headers: {
-         Authorization: `Bearer ${tokensBuyer.accessToken}`
+          Authorization: `Bearer ${tokensBuyer.accessToken}`
         }
-       }
-      )
+      })
 
       expect(response.status).toBe(201)
     })
   })
 
-
   describe('Testing buying a product with enough balance', () => {
-    response: {}
+    {
+    }
     test('Should return 200 status code', async () => {
-      response = await axios.post(`${URL}/api/user/${idBuyer}/articles/buy/${idProduct}`, {}, 
-      {
-        headers: {
-          Authorization: `Bearer ${tokensBuyer.accessToken}`
+      response = await axios.post(
+        `${URL}/api/user/${idBuyer}/articles/buy/${idProduct}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokensBuyer.accessToken}`
+          }
         }
-      })
-      
+      )
+
       expect(response.status).toBe(200)
     })
-
   })
-
 })
 
 /**

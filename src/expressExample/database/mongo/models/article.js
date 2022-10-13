@@ -32,8 +32,8 @@ const ArticleSchema = new Schema(
       transform: (_, ret) => {
         delete ret._id
       }
-    },
-    /*virtuals: {
+    }
+    /* virtuals: {
       fullName: {
         get() {
           return `${this.name} ${this.lastName}`

@@ -2,7 +2,6 @@ const { model, Schema } = require('mongoose')
 
 const BalanceSchema = new Schema(
   {
-    
     balance: {
       required: true,
       type: Number
@@ -20,8 +19,8 @@ const BalanceSchema = new Schema(
       transform: (_, ret) => {
         delete ret._id
       }
-    },
-    /*virtuals: {
+    }
+    /* virtuals: {
       fullName: {
         get() {
           return `${this.name} ${this.lastName}`

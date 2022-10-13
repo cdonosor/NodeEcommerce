@@ -12,7 +12,6 @@ const ArticleIDSchema = Type.Object({
   id: Type.String({ minLength: 21, maxLength: 21 })
 })
 
-
 module.exports = {
   storeArticleSchema,
   updateArticleSchema,

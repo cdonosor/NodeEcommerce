@@ -12,7 +12,7 @@ const ROLES = {
     description: 'user who can only buy articles'
   },
 
-  4:{
+  4: {
     name: 'seller',
     description: 'user who can only sell articles'
   }
