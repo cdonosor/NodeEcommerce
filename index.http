@@ -1,0 +1,87 @@
+###Add balance to user
+
+POST http://localhost:2000/api/balance/suzEjrFmT6Ih6dWOOk9d
+Content-Type: application/json
+
+{
+  "balance": 10000,
+  "roleId": "3"
+}
+
+### Get all user
+GET http://localhost:2000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXMuYXJkaWxhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoic2Fsa2Zqc2RsYWtqZmxkYXM7amZkbHNhZml1aGV3aXJmaCIsImlhdCI6MTY2NTI0MDgyMiwiZXhwIjoxNjY1MjQxNDIyfQ._WLIvRu-VPZ8NEckhBPVJeGfSQXoGkasCXyYB-1D-gw
+
+### Get one user
+GET http://localhost:2000/api/user/kQR5qvc6Ul_1N_TYvqm_f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbGViLnBhcnJhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2O2FiYzsiLCJpYXQiOjE2NjI1MTM2ODYsImV4cCI6MTY2MjUxNDI4Nn0.EKCJVqBqniIR5XPX11lFJdDV5S2G1_yco4PHDcaK0tM
+
+### Save a new user
+POST http://localhost:2000/api/user/signup
+Content-Type: application/json
+
+{
+  "name": "Clientazo",
+  "lastName": "Farkas",
+  "email": "millones@gmail.com",
+  "password": "hola123;qwerty",
+  "role": "3"
+}
+
+### 404 error
+GET http://localhost:2000/route/that/does/not/exists
+
+### buyer Login
+POST http://localhost:2000/api/user/login
+Content-Type: application/json
+
+{
+  "email": "cdonosor@gmail.com",
+  "password": "1q2w3e;qwerty"
+}
+
+### seller Login
+POST http://localhost:2000/api/user/login
+Content-Type: application/json
+
+{
+  "email": "vanebrigabiel@gmail.com",
+  "password": "hola123;qwerty"
+}
+
+### Create role
+POST http://localhost:2000/api/role
+Content-Type: application/json
+
+{
+  "id": "4",
+  "name": "seller"
+}
+
+### Get a role
+GET http://localhost:2000/api/role/2
+Content-Type: application/json
+
+### Refresh user token
+GET http://localhost:2000/api/user/refreshAccessToken/x5kUjzl8T4TtQ1oE84vOB
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhbGViLnBhcnJhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2O2FiYzsiLCJpYXQiOjE2NjI1MTM2ODYsImV4cCI6MTY2MjUxNzI4Nn0.gpfhczqHiN94Sis8s1icT-lVJJn2b_1cGjOH72ei1R4
+
+### ARTICLE
+GET http://localhost:2000/api/article
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imx1aXMuYXJkaWxhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoic2Fsa2Zqc2RsYWtqZmxkYXM7amZkbHNhZml1aGV3aXJmaCIsImlhdCI6MTY2NTI0MTAxMywiZXhwIjoxNjY1MjQxNjEzfQ.DUcZV9qNbeuzXP4Kf-6SO_KiSZklUxXykK5JDlKESaY
+
+### buy article
+POST http://localhost:2000/api/user/suzEjrFmT6Ih6dWOOk9d/articles/buy/PC8jfCv5C5bG1lsqhYDse
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNkb25vc29yQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMXEydzNlO3F3ZXJ0eSIsImlhdCI6MTY2NTYxNjcwMiwiZXhwIjoxNjY1NjE3MzAyfQ.K7gsn3XDcfcBz9HQFtfe-_KD4A1_w0Nka6bIM_Mg4xA
+
+### save article as seller
+POST http://localhost:2000/api/article/qA8xOfc3CfdCHJVl2fbmc
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhbmVicmlnYWJpZWxAZ21haWwuY29tIiwicGFzc3dvcmQiOiJob2xhMTIzO3F3ZXJ0eSIsImlhdCI6MTY2NTU1MTEyMCwiZXhwIjoxNjY1NTUxNzIwfQ.-fBzu2RMuiGmJPHPpOEOnIrs46AUuQgYKDtXjsNgH-w
+
+{
+    "name": "postre",
+    "description": "postre de crema def lujo",
+    "price": 300000,
+    "roleId": "4"
+}
